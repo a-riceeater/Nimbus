@@ -11,15 +11,48 @@ codeEditor.addEventListener("input", (e) => {
     else {
         const jsRegex = /\b(var|let|const|function|if(?!\()|else|for|while|do|switch|case|break|return)\b/g;
 
-        // Only update the content if it's not a line break
         if (e.inputType !== "insertParagraph") {
             const textContent = codeEditor.innerHTML;
 
-            // Replace the regex with the span and update the innerHTML
             codeEditor.innerHTML = textContent.replace(jsRegex, '<span class="tN24JUN6SHzetFRvTMWP">$1</span>');
 
-            // Place the caret at the end of the editor
+
+            if (e.data == "{") codeEditor.innerHTML += "}"
+            if (e.data == "[") codeEditor.innerHTML += "]"
+            if (e.data == "<") codeEditor.innerHTML += ">"
+
             placeCaretAtEnd(codeEditor);
+
+            var el = document.getElementById('code-editor')[0],
+                cur_pos = 0;
+
+            if (el.selectionStart) {
+                cur_pos = el.selectionStart;
+            } else if (document.selection) {
+                el.focus();
+
+                var r = document.selection.createRange();
+                if (r != null) {
+                    var re = el.createTextRange(),
+                        rc = re.duplicate();
+                    re.moveToBookmark(r.getBookmark());
+                    rc.setEndPoint('EndToStart', re);
+
+                    cur_pos = rc.text.length;
+                }
+            }
+
+            if (el.setSelectionRange) {
+                el.focus();
+                el.setSelectionRange(cur_pos - myval, cur_pos - myval);
+            }
+            else if (el.createTextRange) {
+                var range = el.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', cur_pos - myval);
+                range.moveStart('character', cur_pos - myval);
+                range.select();
+            }
         }
     }
 

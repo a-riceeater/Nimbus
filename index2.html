@@ -15,14 +15,13 @@
     <div id="line-numbers">
         <div></div>
     </div>
-    <pre><code id="code-editor" class="language-javascript" contenteditable="true" spellcheck="false" autofocus="true">
-        console.log("hi")
-    </code></pre>
+    <pre><code id="code-editor" class="language-javascript" contenteditable="true" spellcheck="false" autofocus="true">console.log("hi")</code></pre>
     <script>
         try {
             hljs.initHighlightingOnLoad();
 
             document.getElementById("code-editor").addEventListener("input", (e) => {
+                if (e.inputType === 'insertParagraph') return;
                 hljs.highlightAll();
                 placeCaretAtEnd(document.getElementById("code-editor"))
             })
