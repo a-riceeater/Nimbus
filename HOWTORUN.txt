@@ -1,5 +1,5 @@
 npx browser-sync start --config bs-config.js
 
-OR
+or 
 
 npx serve

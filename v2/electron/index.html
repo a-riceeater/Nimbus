@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>code editor</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" />
+    <style>
+        #fileTab {
+            position: fixed;
+            left: 0%;
+            top: 0%;
+            width: 100%;
+            height: 10%;
+        }
+
+        #codeContainer {
+            position: fixed;
+            top: 10%;
+            left: 0%;
+            z-index: 1;
+            width: 100%;
+            height: 90%;
+            outline: 0;
+        }
+
+        #code {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            color: transparent;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow: auto;
+            outline: 0;
+            padding-left: 5px;
+            caret-color: black;
+        }
+
+        #highlight {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            font-size: 14px;
+            color: black;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow: auto;
+            padding-left: 5px;
+        }
+
+        #code,
+        #highlight {
+            font-size: 14px;
+            line-height: 1.5;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        #code::selection {
+            outline: none;
+            background-color: rgb(211, 211, 211, 0.4);
+            color: transparent;
+            caret-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="fileTab"></div>
+    <div id="codeContainer">
+        <pre>
+            <div id="highlight" ></div>
+        </pre>
+        <textarea name="code" id="code" cols="30" rows="10"></textarea>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script>
+        const codeElement = document.querySelector("#code");
+        const highlightElement = document.getElementById('highlight');
+
+        function updateHighlight() {
+            const code = codeElement.value;
+            var highlightedCode = Prism.highlight(code, Prism.languages.html, 'html');
+
+            highlightElement.innerHTML = highlightedCode;
+        }
+
+        codeElement.addEventListener('input', updateHighlight);
+        codeElement.addEventListener("scroll", () => sync_scroll(codeElement))
+
+        function sync_scroll(element) {
+            let result_element = highlightElement;
+            result_element.scrollTop = element.scrollTop;
+            result_element.scrollLeft = element.scrollLeft;
+        }
+
+        codeElement.addEventListener("keydown", (event) => {
+            let code = codeElement.value;
+            if (event.key == "Tab") {
+                event.preventDefault();
+                let before_tab = code.slice(0, codeElement.selectionStart);
+                let after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                let cursor_pos = codeElement.selectionStart + 1;
+                codeElement.value = before_tab + "\t" + after_tab;
+
+                codeElement.selectionStart = cursor_pos;
+                codeElement.selectionEnd = cursor_pos;
+                updateHighlight();
+            }
+        })
+    </script>
+
+</body>
+
+</html>
