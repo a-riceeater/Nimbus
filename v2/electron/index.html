@@ -103,19 +103,88 @@
             result_element.scrollLeft = element.scrollLeft;
         }
 
+        var lastChar;
         codeElement.addEventListener("keydown", (event) => {
             let code = codeElement.value;
-            if (event.key == "Tab") {
-                event.preventDefault();
-                let before_tab = code.slice(0, codeElement.selectionStart);
-                let after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
-                let cursor_pos = codeElement.selectionStart + 1;
-                codeElement.value = before_tab + "\t" + after_tab;
 
-                codeElement.selectionStart = cursor_pos;
-                codeElement.selectionEnd = cursor_pos;
-                updateHighlight();
+            switch (event.key) {
+                case "Tab":
+
+                    event.preventDefault();
+                    var before_tab = code.slice(0, codeElement.selectionStart);
+                    var after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                    var cursor_pos = codeElement.selectionStart + 1;
+                    codeElement.value = before_tab + "\t" + after_tab;
+
+                    codeElement.selectionStart = cursor_pos;
+                    codeElement.selectionEnd = cursor_pos;
+                    break;
+
+                case "{":
+
+                    event.preventDefault();
+                    var before_tab = code.slice(0, codeElement.selectionStart);
+                    var after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                    var cursor_pos = codeElement.selectionStart + 1;
+                    codeElement.value = before_tab + "{}" + after_tab;
+
+                    codeElement.selectionStart = cursor_pos;
+                    codeElement.selectionEnd = cursor_pos;
+                    break;
+
+                case "\"":
+                    event.preventDefault();
+                    var before_tab = code.slice(0, codeElement.selectionStart);
+                    var after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                    var cursor_pos = codeElement.selectionStart + 1;
+                    codeElement.value = before_tab + "\"\"" + after_tab;
+
+                    codeElement.selectionStart = cursor_pos;
+                    codeElement.selectionEnd = cursor_pos;
+                    break;
+                case "\'":
+
+                    event.preventDefault();
+                    var before_tab = code.slice(0, codeElement.selectionStart);
+                    var after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                    var cursor_pos = codeElement.selectionStart + 1;
+                    codeElement.value = before_tab + "\'\'" + after_tab;
+
+                    codeElement.selectionStart = cursor_pos;
+                    codeElement.selectionEnd = cursor_pos;
+                    break;
+                case "\(":
+
+                    event.preventDefault();
+                    var before_tab = code.slice(0, codeElement.selectionStart);
+                    var after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                    var cursor_pos = codeElement.selectionStart + 1;
+                    codeElement.value = before_tab + "\(\)" + after_tab;
+
+                    codeElement.selectionStart = cursor_pos;
+                    codeElement.selectionEnd = cursor_pos;
+                    break;
+                case "\)":
+                    event.preventDefault();
+                    var before_tab = code.slice(0, codeElement.selectionStart);
+                    var after_tab = code.slice(codeElement.selectionEnd, codeElement.value.length);
+                    var cursor_pos = codeElement.selectionStart + 1;
+
+
+                    if (lastChar == "\(") {
+                        
+                    } else {
+                        codeElement.value = before_tab + "\)" + after_tab;
+
+                        codeElement.selectionStart = cursor_pos;
+                        codeElement.selectionEnd = cursor_pos;
+                    }
+
+                    break;
             }
+
+            updateHighlight();
+
         })
     </script>
 
