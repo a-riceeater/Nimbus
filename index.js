@@ -46,6 +46,25 @@ codeEditor.addEventListener("keyup", (e) => {
     }
 });
 
+document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key == "s") {
+        e.preventDefault();
+    } else if (e.key == "Tab") {
+        e.preventDefault();
+    } else if (e.ctrlKey && e.key == "w") {
+        e.preventDefault();
+    } else if (e.ctrlKey && !isNaN(e.key)) {
+        e.preventDefault();
+    } else if (e.ctrlKey && e.key == "r") {
+        // e.preventDefault();
+    }
+})
+
+document.addEventListener("beforeunload", (e) => {
+    e.preventDefault();
+    return false;
+})
+
 function placeCaretAtEnd(el) {
     el.focus();
 
