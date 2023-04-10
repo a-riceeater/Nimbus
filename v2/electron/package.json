@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@electron/remote": "^2.0.9",
+    "electron": "^24.0.0"
+  }
+}
