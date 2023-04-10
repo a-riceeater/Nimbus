@@ -1,0 +1,64 @@
+#fileTab {
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 5%;
+}
+
+#codeContainer {
+    position: fixed;
+    top: 5%;
+    left: 0%;
+    z-index: 1;
+    width: 100%;
+    height: 95%;
+    outline: 0;
+}
+
+#code {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    color: transparent;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow: auto;
+    outline: 0;
+    padding-left: 5px;
+    caret-color: black;
+}
+
+#highlight {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    font-size: 14px;
+    color: black;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow: auto;
+    padding-left: 5px;
+}
+
+#code,
+#highlight {
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: Consolas, 'Courier New', monospace;
+}
+
+#code::selection {
+    outline: none;
+    background-color: rgba(83, 180, 236, 0.4);
+    color: transparent;
+    caret-color: black;
+}
