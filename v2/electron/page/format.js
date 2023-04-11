@@ -1,11 +1,26 @@
-const codeElement = document.querySelector("#code");
-const highlightElement = document.getElementById('highlight');
-
 function updateHighlight() {
-    const code = codeElement.value;
-    var highlightedCode = Prism.highlight(code, Prism.languages.javascript, 'javascript');
+    console.log("%cFormating...", "color: lightblue")
 
-    highlightElement.innerHTML = highlightedCode;
+    const code = codeElement.value;
+    unsavedChanges = true;
+    try {
+        if (!invalidFormat) {
+            var highlightedCode = Prism.highlight(code, Prism.languages[currentLanguage], currentLanguage);
+            highlightElement.innerHTML = highlightedCode;
+        } else {
+            highlightElement.innerHTML = code.sanitizeHTML()
+        }
+    } catch (err) {
+        invalidFormat = true;
+        highlightElement.innerHTML = code.sanitizeHTML()
+        console.log("%cInvalid format detected. Name: " + currentLanguage, "color: red")
+    }
+
+}
+
+String.prototype.sanitizeHTML = function () {
+	return this.replace(new RegExp("&", "g"), "&amp;")
+		   .replace(new RegExp("<", "g"), "&lt;")
 }
 
 codeElement.addEventListener('input', updateHighlight);
@@ -20,6 +35,10 @@ function sync_scroll(element) {
 var lastChar;
 codeElement.addEventListener("keydown", (event) => {
     let code = codeElement.value;
+    if (event.ctrlKey) {
+        event.stopImmediatePropagation();
+        return handleShortcuts(event);
+    }
 
     switch (event.key) {
         case "Tab":

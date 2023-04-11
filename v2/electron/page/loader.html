@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentron - Loading</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Inter");
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            -webkit-app-region: drag;
+        }
+
+        ::selection {
+            background-color: transparent;
+        }
+
+        #container {
+            position: fixed;
+            left: 50%;
+            top: 60%;
+            width: 100%;
+            height: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            transition: .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1 style="font-size: 24px; transition: .5s;">Loading Mentron...</h1>
+        <p id="search" id="font-size: 14px;">Searching for updates...</p>
+    </div>
+
+    <script>
+
+
+        (async () => {
+
+            const inter = setInterval(a, 1000)
+
+            function a() {
+                document.querySelector("h1").style.scale = 1.1;
+                setTimeout(() => document.querySelector("h1").style.scale = 1.0, 500)
+            }
+
+            a();
+
+            //await fetch('updateCheckerLinkIdk')
+
+            // Coming Later
+
+            setTimeout(async () => {
+                clearInterval(inter);
+                const { ipcRenderer } = require("electron");
+                await ipcRenderer.invoke("openMain");
+
+                const remote = require("@electron/remote")
+                remote.getCurrentWindow().close();
+            }, 2000)
+        })()
+    </script>
+</body>
+
+</html>

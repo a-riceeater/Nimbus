@@ -2,24 +2,56 @@
 <html>
 
 <head>
-    <title>code editor</title>
+    <title>Mentron</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./cdn/prism.min.css">
     <link rel="stylesheet" href="./page.css">
     <link rel="stylesheet" href="./window.css">
+    <link rel="stylesheet" href="./ftypes.css">
 </head>
 
 <body>
-
-    <div id="fileTab"></div>
-    <div id="codeContainer">
-        <pre>
-            <div id="highlight" ></div>
-        </pre>
-        <textarea name="code" id="code" cols="30" rows="10" spellcheck="false"></textarea>
+    <div class="window-topbar">
+        <button class="topbarBtn" id="minimizeWindow">🗕</button>
+        <button class="topbarBtn" id="maximizeWindow">🗖</button>
+        <button class="topbarBtn" id="closeXWindow">X</button>
     </div>
+    <div id="fileTab">
+
+        <span id="createFileBtn">+</span>
+    </div>
+    <div id="codeContainer" style="display: none">
+        <pre>
+            <div id="highlight"></div>
+        </pre>
+        <textarea name="code" id="code" cols="30" rows="10" spellcheck="false" autofocus="true"></textarea>
+    </div>
+
+    <div id="fileExplorer">
+        <span id="feTitle">FILE EXPLORER</span>
+    </div>
+
+    <div class="prompt modal">
+        <h1 id="promptTitle">promptTitle</h1>
+        <p id="promptDesc">promptDesc</p>
+
+        <button id="promptAccept">Continue</button>
+        <button id="promptCancel">Cancel</button>
+    </div>
+
+    <div id="shade"></div> 
+
+    <div id="terminal">
+        <span id="terminalLabel">TERMINAL</span>
+    </div>
+
     <script src="./cdn/prism.min.js"></script>
+    <script src="./tabmanager.js"></script>
+    <script src="./filemanager.js"></script>
+
+
     <script src="./format.js"></script>
+    <script src="./window.js"></script>
 </body>
 
 </html>
