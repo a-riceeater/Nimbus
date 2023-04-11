@@ -28,7 +28,6 @@ async function saveFile(fileData) {
 
 const FileManager = { openFile, openDir, saveFile }
 
-var leftAmounts = 0;
 window.addEventListener("keydown", (e) => {
     if (e.ctrlKey) e.stopImmediatePropagation();
     handleShortcuts(e);
