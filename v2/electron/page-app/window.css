@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Inter");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Nunito Sans");
+
 
 ::selection {
     background-color: transparent;
@@ -40,7 +43,7 @@
     background-color: #313638;
 }
 
-#codeContainer {
+#codeContainer, #welcomePannel {
     position: fixed;
     top: 75px;
     left: 200px;
@@ -166,4 +169,39 @@
     opacity: 0.3;
     z-index: 5;
     display: none;
+}
+
+#welcomePannel h1 {
+    margin-left: 100px;
+    margin-top: 100px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 68px;
+}
+
+#welcomePannel p {
+    margin-top: -20px;
+    margin-left: 100px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 18px;
+}
+
+#welcomePannel a {
+    margin-left: 100px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    cursor: pointer; 
+    color: blue;
+}
+
+#welcomePannel a span {
+    border-bottom: 1px solid transparent;
+    transition: .5s;
+}
+
+#welcomePannel a span:hover {
+    border-bottom: 1px solid blue;
+}
+
+.middle {
+    vertical-align: middle;
 }

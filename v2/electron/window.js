@@ -20,7 +20,7 @@ const createMainWindow = () => {
         //icon: path.join(__dirname + '/relico.ico'),
     })
 
-    win.loadFile('./page/index.html')
+    win.loadFile('./page-app/index.html')
     require('@electron/remote/main').enable(win.webContents)
 }
 
@@ -42,7 +42,7 @@ const createLoaderWindow = () => {
         //icon: path.join(__dirname + '/relico.ico'),
     })
 
-    win.loadFile('./page/loader.html')
+    win.loadFile('./page-app/loader.html')
     require('@electron/remote/main').enable(win.webContents)
 }
 
@@ -60,6 +60,56 @@ ipcMain.handle('openDir', async () => {
     const result = dialog.showOpenDialogSync({ properties: ['openDirectory'] })
     return result;
 })
+
+ipcMain.handle("openDirFiles", async (event, dir) => {
+    try {
+        const files = await fs.promises.readdir(dir);
+        const fss = [];
+
+        for (const file of files) {
+            const fromPath = path.join(dir, file);
+            const stat = await fs.promises.stat(fromPath);
+
+            if (stat.isDirectory()) {
+                const subfiles = await openDirFilesRecursive(fromPath);
+                fss.push([file, subfiles]);
+            } else if (stat.isFile()) {
+                fss.push(fromPath);
+            }
+        }
+
+        return fss;
+
+    } catch (error) {
+        throw error;
+    }
+});
+
+async function openDirFilesRecursive(dir) {
+    try {
+        const files = await fs.promises.readdir(dir);
+        const fss = [];
+
+        for (const file of files) {
+            const fromPath = path.join(dir, file);
+            const stat = await fs.promises.stat(fromPath);
+
+            if (stat.isDirectory()) {
+                const subfiles = await openDirFilesRecursive(fromPath);
+                fss.push([file, subfiles]);
+            } else if (stat.isFile()) {
+                fss.push(fromPath);
+            }
+        }
+
+        return fss;
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 
 // Window
 
@@ -86,7 +136,7 @@ ipcMain.handle("dirFile", async (event, file) => {
     return true;
 })
 
-ipcMain.handle("dirDir", async (event, dir) => {
+ipcMain.handle("delDir", async (event, dir) => {
     fs.rmSync(dir, (err) => { if (err) throw err; });
     return true;
 })

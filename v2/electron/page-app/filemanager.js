@@ -20,6 +20,11 @@ async function openDir() {
     return result;
 }
 
+async function openDirFiles(dir) {
+    const result = await ipcRenderer.invoke("openDirFiles", dir)
+    return result;
+}
+
 async function saveFile(fileData) {
     const result = await ipcRenderer.invoke("saveFile", currentEditingFile, fileData);
     console.dir(result);
@@ -34,9 +39,10 @@ window.addEventListener("keydown", (e) => {
 })
 
 function openFileUser() {
-    document.getElementById("codeContainer").style.display = "block"
     FileManager.openFile()
         .then(async (data) => {
+            if (!data) return;
+            document.getElementById("codeContainer").style.display = "block"
             const fdata = data[1];
             var fname = data[0][0].substring(data[0][0].lastIndexOf("."), data[0][0].length).replace(".", "");
             var fnamePure = data[0][0].substring(data[0][0].lastIndexOf("\\"), data[0][0].length).replace("\\", "");
@@ -131,3 +137,16 @@ function handleShortcuts(e) {
         // handle saving later
     }
 }
+
+document.getElementById("openFolderLabel").addEventListener("click", () => {
+    openDir()
+        .then((data) => {
+            const folder = data[0];
+            openDirFiles(folder)
+                .then((folderFiles) => {
+
+                })
+        })
+})
+
+document.getElementById("openFileLabel").addEventListener("click", openFileUser)
