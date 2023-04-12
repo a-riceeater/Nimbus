@@ -98,13 +98,25 @@ function openFileUser() {
                         await prompt("Unsaved changes!", "Continue without saving?", (st) => {
                             if (!st) return
                             Tabs.removeTab();
+                            Cache.deleteCache(data[0][0])
                         })
                     } else {
                         Tabs.removeTab()
+                        Cache.deleteCache(data[0][0])
                     }
-                    
+
                 } else {
-                    // switch to file
+
+                    codeElement.value = fdata;
+
+                    updateHighlight(true);
+
+                    document.getElementById("welcomePannel").style.display = "none"
+                    document.getElementById("codeContainer").style.display = "block"
+
+                    document.querySelectorAll(".currentEditingTab").forEach(ele => ele.classList.remove("currentEditingTab"));
+                    fTab.classList.add("currentEditingTab")
+
                 }
             })
         })
@@ -139,7 +151,7 @@ function handleShortcuts(e) {
 
         e.preventDefault();
 
-        
+
 
         if (!unsavedChanges) return Tabs.removeTab();
         prompt("Unsaved changes!", "Continue without saving?", (st) => {
@@ -209,14 +221,95 @@ function createFileExplorerElements(files, parentElement) {
             spanElement.textContent = `${extension.toUpperCase().slice(0, 3)} `;
             fileElement.appendChild(spanElement);
 
-            // fileElement.setAttribute("data", file)
-
             fileElement.appendChild(document.createTextNode(fileName));
 
-            fileElement.addEventListener("click", () => {
+            fileElement.addEventListener("click", async () => {
                 const cachedData = Cache.getCache(file)
 
+                const fTab = document.createElement("div");
+                fTab.innerHTML = `
+                    <span class="fileBtnContent">
+                    <span class="file-type ftype-${extension}">${extension.toUpperCase().substring(0, 3)}</span>
+                    <span class="file-name">${fileName}</span>
+                    </span>`
+
+                fTab.style.left = leftAmounts + "px";
+
+                if (fileName.length > 12) {
+                    fTab.style.width = (fileName.length * 12) + "px";
+                } else {
+                    fTab.style.width = "150px"
+                }
+
+                leftAmounts += parseInt(fTab.style.width.replace("px", ""))
+
+                document.querySelectorAll(".currentEditingTab").forEach(ele => ele.classList.remove("currentEditingTab"));
+
+                fTab.classList.add("fileBtn")
+                fTab.classList.add("currentEditingTab")
+
+                document.getElementById("fileTab").appendChild(fTab);
+
+                unsavedChanges = false;
+
+                fTab.addEventListener("click", async (e) => {
+                    e.preventDefault();
+                    if (e.target.classList.contains("file-name")) {
+                        if (unsavedChanges) {
+                            await prompt("Unsaved changes!", "Continue without saving?", (st) => {
+                                if (!st) return
+                                Tabs.removeTab();
+                                Cache.deleteCache(data[0][0])
+                            })
+                        } else {
+                            Tabs.removeTab()
+                            Cache.deleteCache(data[0][0])
+                        }
+
+                    } else {
+
+                        if (!cachedData) {
+                            const fdata = await ipcRenderer.invoke("getFileContents", file)
+
+                            codeElement.value = fdata;
+
+                            updateHighlight(true);
+
+                            document.getElementById("welcomePannel").style.display = "none"
+                            document.getElementById("codeContainer").style.display = "block"
+
+                            document.querySelectorAll(".currentEditingTab").forEach(ele => ele.classList.remove("currentEditingTab"));
+                            fTab.classList.add("currentEditingTab")
+
+                        } else {
+                            codeElement.value = cachedData;
+
+
+                            updateHighlight(true);
+
+                            document.getElementById("welcomePannel").style.display = "none"
+                            document.getElementById("codeContainer").style.display = "block"
+
+                            document.querySelectorAll(".currentEditingTab").forEach(ele => ele.classList.remove("currentEditingTab"));
+                            fTab.classList.add("currentEditingTab")
+
+                        }
+
+                    }
+                })
+
                 if (!cachedData) {
+                    const fdata = await ipcRenderer.invoke("getFileContents", file)
+
+                    codeElement.value = fdata;
+
+                    updateHighlight(true);
+
+                    document.getElementById("welcomePannel").style.display = "none"
+                    document.getElementById("codeContainer").style.display = "block"
+
+                    document.querySelectorAll(".currentEditingTab").forEach(ele => ele.classList.remove("currentEditingTab"));
+                    fTab.classList.add("currentEditingTab")
 
                 } else {
                     codeElement.value = cachedData;
@@ -226,6 +319,9 @@ function createFileExplorerElements(files, parentElement) {
 
                     document.getElementById("welcomePannel").style.display = "none"
                     document.getElementById("codeContainer").style.display = "block"
+
+                    document.querySelectorAll(".currentEditingTab").forEach(ele => ele.classList.remove("currentEditingTab"));
+                    fTab.classList.add("currentEditingTab")
 
                 }
             })

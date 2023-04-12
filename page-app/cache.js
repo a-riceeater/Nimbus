@@ -8,4 +8,8 @@ function getCache(name) {
     return contentCache[name];
 }
 
-const Cache = { putCache, getCache }
+function deleteCache(name) {
+    delete contentCache[name]
+}
+
+const Cache = { putCache, getCache, deleteCache }
