@@ -54,6 +54,17 @@
     margin-left: 5px;
 }
 
+.explorerFile, .explorerFolder {
+    margin-left: 8px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+}
+
+.explorerSubfiles {
+    margin-left: 12px;
+    cursor: pointer;
+}
+
 .fileBtn {
     font-family: 'Courier New', monospace;
     height: 100%;

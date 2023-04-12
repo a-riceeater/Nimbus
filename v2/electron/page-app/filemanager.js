@@ -144,9 +144,59 @@ document.getElementById("openFolderLabel").addEventListener("click", () => {
             const folder = data[0];
             openDirFiles(folder)
                 .then((folderFiles) => {
-
+                    const fileExplorer = document.getElementById("fileExplorer");
+                    createFileExplorerElements(folderFiles, fileExplorer);
                 })
         })
-})
+});
+
+function createFileExplorerElements(files, parentElement) {
+    for (const file of files) {
+      if (Array.isArray(file)) {
+        const folderName = file[0];
+        const subfiles = file[1];
+  
+        const folderElement = document.createElement("p");
+        folderElement.classList.add("explorerFolder");
+        folderElement.textContent = `+ ${folderName}`;
+  
+        const subfilesElement = document.createElement("div");
+        subfilesElement.classList.add("explorerSubfiles");
+        subfilesElement.classList.add("hidden");
+  
+        folderElement.addEventListener("click", () => {
+          subfilesElement.classList.toggle("hidden");
+          folderElement.textContent =
+            folderElement.textContent === `+ ${folderName}`
+              ? `- ${folderName}`
+              : `+ ${folderName}`;
+        });
+  
+        createFileExplorerElements(subfiles, subfilesElement);
+  
+        parentElement.appendChild(folderElement);
+        parentElement.appendChild(subfilesElement);
+      } else {
+        const fileElement = document.createElement("p");
+        fileElement.classList.add("explorerFile");
+  
+        const fileName = file.split("\\").pop();
+        const extension = fileName.split(".").pop();
+  
+        const spanElement = document.createElement("span");
+        spanElement.classList.add(`ftype-${extension}`);
+        spanElement.textContent = `${extension.toUpperCase().slice(0, 3)} `;
+        fileElement.appendChild(spanElement);
+  
+        fileElement.appendChild(document.createTextNode(fileName));
+  
+        parentElement.appendChild(fileElement);
+      }
+    }
+  }
+  
+  
+
+
 
 document.getElementById("openFileLabel").addEventListener("click", openFileUser)

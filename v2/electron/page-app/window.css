@@ -39,11 +39,12 @@
     left: 200px;
     top: 35px;
     width: calc(100% - 200px);
-    height: calc(75px -  35px);
+    height: calc(75px - 35px);
     background-color: #313638;
 }
 
-#codeContainer, #welcomePannel {
+#codeContainer,
+#welcomePannel {
     position: fixed;
     top: 75px;
     left: 200px;
@@ -91,7 +92,8 @@
     color: white;
 }
 
-#maximizeWindow:hover, #minimizeWindow:hover {
+#maximizeWindow:hover,
+#minimizeWindow:hover {
     background-color: rgb(211, 211, 211, 0.4);
 }
 
@@ -102,6 +104,7 @@
     width: calc(200px - 5px);
     height: calc(100% - 35px);
     border-right: 5px solid #E4B363;
+    overflow-y: scroll;
 }
 
 .prompt {
@@ -189,7 +192,7 @@
     margin-left: 100px;
     font-family: 'Courier New', monospace;
     font-size: 16px;
-    cursor: pointer; 
+    cursor: pointer;
     color: blue;
 }
 
@@ -204,4 +207,8 @@
 
 .middle {
     vertical-align: middle;
+}
+
+.hidden {
+    display: none;
 }
