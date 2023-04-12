@@ -1,5 +1,0 @@
-npx browser-sync start --config bs-config.js
-
-or 
-
-npx serve
