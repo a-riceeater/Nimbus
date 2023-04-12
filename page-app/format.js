@@ -1,8 +1,9 @@
-function updateHighlight() {
+function updateHighlight(updateChanges) {
     console.log("%cFormating...", "color: lightblue")
+    if (updateChanges == true) console.log("%cSkipping changes status...", "color: yellow")
 
     const code = codeElement.value;
-    unsavedChanges = true;
+    if (!updateChanges == true) unsavedChanges = true;
     try {
         if (!invalidFormat) {
             var highlightedCode = Prism.highlight(code, Prism.languages[currentLanguage], currentLanguage);

@@ -61,7 +61,7 @@ function openFileUser() {
             Cache.putCache(data[0][0], fdata)
 
 
-            updateHighlight(fdata);
+            updateHighlight(true);
 
             document.getElementById("welcomePannel").style.display = "none"
 
@@ -94,11 +94,15 @@ function openFileUser() {
             fTab.addEventListener("click", async (e) => {
                 e.preventDefault();
                 if (e.target.classList.contains("file-name")) {
-                    await prompt("Unsaved changes!", "Continue without saving?", (st) => {
-                        if (!st) return
-
-                        Tabs.removeTab();
-                    })
+                    if (unsavedChanges) {
+                        await prompt("Unsaved changes!", "Continue without saving?", (st) => {
+                            if (!st) return
+                            Tabs.removeTab();
+                        })
+                    } else {
+                        Tabs.removeTab()
+                    }
+                    
                 } else {
                     // switch to file
                 }
@@ -218,7 +222,7 @@ function createFileExplorerElements(files, parentElement) {
                     codeElement.value = cachedData;
 
 
-                    updateHighlight(cachedData);
+                    updateHighlight(true);
 
                     document.getElementById("welcomePannel").style.display = "none"
                     document.getElementById("codeContainer").style.display = "block"
