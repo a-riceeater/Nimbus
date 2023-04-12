@@ -60,6 +60,8 @@ function openFileUser() {
             codeElement.value = fdata;
             updateHighlight(fdata);
 
+            document.getElementById("welcomePannel").style.display = "none"
+
             const fTab = document.createElement("div");
             fTab.innerHTML = `
                 <span class="fileBtnContent">
@@ -67,14 +69,7 @@ function openFileUser() {
                 <span class="file-name">${fnamePure}</span>
                 </span>`
 
-            if (leftAmounts != 0) {
-                console.log("lm", leftAmounts + "px")
-                fTab.style.left = leftAmounts + "px";
-            }
-
-            if (leftAmounts == 0) {
-                fTab.style.borderLeft = "none"
-            }
+            fTab.style.left = leftAmounts + "px";
 
             if (fnamePure.length > 12) {
                 fTab.style.width = (fnamePure.length * 12) + "px";
@@ -90,6 +85,8 @@ function openFileUser() {
             fTab.classList.add("currentEditingTab")
 
             document.getElementById("fileTab").appendChild(fTab);
+
+            unsavedChanges = false;
 
             fTab.addEventListener("click", async (e) => {
                 e.preventDefault();

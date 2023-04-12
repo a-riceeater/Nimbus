@@ -1,7 +1,7 @@
 console.log("%cTab Manager Loading...", "color: lightblue")
 const codeElement = document.querySelector("#code");
 const highlightElement = document.getElementById('highlight');
-var leftAmounts = 0;
+var leftAmounts = 100;
 
 
 function removeTab() {
