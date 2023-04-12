@@ -10,6 +10,11 @@ function removeTab() {
     tab.remove();
     codeElement.value = ''
     highlightElement.innerHTML = ''
+
+    if (leftAmounts == 100) {
+        document.getElementById("codeContainer").style.display = "none"
+        document.getElementById("welcomePannel").style.display = "block"
+    }
 }
 
 const Tabs = { removeTab }

@@ -58,6 +58,9 @@ function openFileUser() {
             currentEditingFile = data[0][0];
 
             codeElement.value = fdata;
+            Cache.putCache(data[0][0], fdata)
+
+
             updateHighlight(fdata);
 
             document.getElementById("welcomePannel").style.display = "none"
@@ -132,6 +135,8 @@ function handleShortcuts(e) {
 
         e.preventDefault();
 
+        
+
         if (!unsavedChanges) return Tabs.removeTab();
         prompt("Unsaved changes!", "Continue without saving?", (st) => {
             if (!st) return
@@ -200,9 +205,29 @@ function createFileExplorerElements(files, parentElement) {
             spanElement.textContent = `${extension.toUpperCase().slice(0, 3)} `;
             fileElement.appendChild(spanElement);
 
+            // fileElement.setAttribute("data", file)
+
             fileElement.appendChild(document.createTextNode(fileName));
 
+            fileElement.addEventListener("click", () => {
+                const cachedData = Cache.getCache(file)
+
+                if (!cachedData) {
+
+                } else {
+                    codeElement.value = cachedData;
+
+
+                    updateHighlight(cachedData);
+
+                    document.getElementById("welcomePannel").style.display = "none"
+                    document.getElementById("codeContainer").style.display = "block"
+
+                }
+            })
+
             parentElement.appendChild(fileElement);
+
         }
     }
 }
