@@ -243,3 +243,7 @@ textarea::-webkit-scrollbar {
 .hidden {
     display: none;
 }
+
+textare {
+    cursor: auto;
+}
