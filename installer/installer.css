@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css?family=Inter");
+
+body {
+    font-family: 'Inter', serif;
+    cursor: default;
+}
+
+.topbar {
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    color: white;
+    width: 100%;
+    height: 7%;
+    background-color: black;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+.topbarBtn {
+    -webkit-app-region: no-drag;
+}
+
+.stage {
+    position: fixed;
+    top: 7%;
+    left: 0%;
+    width: calc(100% - 15px);
+    height: calc(90% - 7%);
+    background-color: #0e0f13;
+    padding-left: 15px;
+    color: lightgray;
+}
+
+#license, #installingData, #uninstallingData {
+    color: lightgray;
+    font-size: 14px;
+    font-family: 'Inter', serif;
+    overflow-y: auto;
+    height: 60%;
+    background-color: #14151b;
+    padding: 5px;
+    border-radius: 10px;
+    width: 94%;
+    padding-left: 10px;
+}
+
+#installingData, #uninstallingData {
+    height: 70% !important;
+}
+
+#installingData::-webkit-scrollbar, #uninstallingData::-webkit-scrollbar {
+    width: 3.5px;
+}
+
+#installingData::-webkit-scrollbar-track, #uninstallingData::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#installingData::-webkit-scrollbar-thumb, #uninstallingData::-webkit-scrollbar-thumb {
+    background-color: #21232c;
+}
+
+#license::-webkit-scrollbar {
+    width: 3.5px;
+}
+
+#license::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#license::-webkit-scrollbar-thumb {
+    background-color: #21232c;
+}
+
+#close {
+    position: absolute;
+    transform: translate(0%, -50%);
+    color: gray;
+    right: 2%;
+    top: 55%;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+#minimize {
+    position: absolute;
+    transform: translate(0%, -50%);
+    color: gray;
+    right: 6%;
+    top: 27%;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#liAgree {
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1.5px solid gray;
+    border-radius: 1.5px;
+    height: 18px;
+    width: 18px;
+    transition: .35s;
+}
+
+.checked {
+    border: 1.5px solid rgb(52, 102, 238) !important;
+    background-color: rgb(52, 102, 238) !important;
+}
+
+.footer {
+    position: fixed;
+    left: 0%;
+    bottom: 0%;
+    width: 100%;
+    height: 10%;
+    background-color: #0e0f13;
+}
+
+.footer button {
+    cursor: pointer;
+    transition: .35s;
+}
+
+#githubFooter {
+    position: absolute;
+    transform: translate(0%, -50%);
+    top: 50%;
+    left: 1%;
+    height: 70%;
+    width: 60px;
+    border: none;
+    background-color: #24262e;
+    color: white;
+    font-family: 'Inter', serif;
+    border-radius: 3px;
+}
+
+#nextBtn {
+    position: absolute;
+    transform: translate(0%, -50%);
+    top: 50%;
+    right: 2%;
+    height: 70%;
+    width: 60px;
+    background-color: rgb(0, 132, 255);
+    color: white;
+    font-family: 'Inter', serif;
+    font-size: 14px;
+    border: none;
+    border-radius: 1px;
+}
+
+#backBtn {
+    position: absolute;
+    transform: translate(0%, -50%);
+    top: 50%;
+    right: 15%;
+    height: 70%;
+    width: 60px;
+    background-color: transparent;
+    color: lightgray;
+    font-family: 'Inter', serif;
+    font-size: 14px;
+    border: 1px solid gray;
+    border-radius: 1px;
+}
+
+.invalid {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+.actionBtn {
+    cursor: pointer;
+    width: 95%;
+    text-align: left;
+    margin-bottom: 20px;
+    height: 45px;
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    color: lightgray;
+    background-color: #14151b;
+    border: none;
+    border-radius: 2.5px;
+    padding: 5px;
+    transition: .35s;
+}
+
+.selectedAction {
+    background-color: rgb(0, 132, 255) !important;
+}
+
+::selection {
+    background: transparent !important;
+}

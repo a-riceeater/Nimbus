@@ -1,0 +1,9 @@
+{
+    "name": "rel installer",
+    "version": "1.0.0",
+    "description": "rel installer",
+    "main": "installer.js",
+    "bin": {
+      "installer": "installer.js"
+    }
+  }

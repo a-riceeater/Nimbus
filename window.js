@@ -149,7 +149,11 @@ ipcMain.handle("rnFile", async (event, old, newn) => {
 // Settings
 
 ipcMain.handle("getLocal", async (event) => {
-    return JSON.parse(fs.readFileSync("./local.json"))
+    if (!fs.existsSync("./local.json")) return JSON.parse(`{
+        "currentFolder": "",
+        "currentTabs": []
+    }`)
+    else return JSON.parse(fs.readFileSync("./local.json"))
 })
 
 app.on('window-all-closed', () => {

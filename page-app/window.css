@@ -55,6 +55,33 @@
     border-top: 1px solid #313638;
 }
 
+
+::-webkit-scrollbar {
+    width: 15px;
+    cursor: default !important;
+    z-index: 20;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#codeContainer::-webkit-scrollbar, #highlight::-webkit-scrollbar {
+    display: none;
+}
+
+textarea::-webkit-scrollbar {
+    cursor: default !important;
+}
+
 #closeXWindow {
     position: absolute;
     transform: translate(0%, -50%);
