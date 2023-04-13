@@ -1,0 +1,23 @@
+{
+  "name": "nimbus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "window.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@electron/remote": "^2.0.9",
+    "adm-zip": "^0.5.10",
+    "electron-winstaller": "^5.1.0",
+    "path": "^0.12.7",
+    "windows-elevate": "^1.0.1"
+  },
+  "devDependencies": {
+    "electron": "^24.1.1",
+    "electron-packager": "^17.1.1"
+  }
+}

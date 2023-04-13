@@ -1,0 +1,26 @@
+{
+    "name": "rel-installer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "installer.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bin": {
+        "installer": "installer.js"
+    },
+    "dependencies": {
+        "@electron/remote": "^2.0.9",
+        "adm-zip": "^0.5.10",
+        "electron-winstaller": "^5.1.0",
+        "path": "^0.12.7",
+        "windows-elevate": "^1.0.1"
+    },
+    "devDependencies": {
+        "electron-packager": "^17.1.1",
+        "electron": "^24.0.0"
+    }
+}

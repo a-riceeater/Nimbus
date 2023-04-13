@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimbus - Loading</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Inter");
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            -webkit-app-region: drag;
+            background-image: url("./sky.webp");
+        }
+
+        ::selection {
+            background-color: transparent;
+        }
+
+        #container {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 100%;
+            height: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            transition: .5s;
+        }
+
+        #progressBar {
+            width: 90%;
+            background-color: lightgray;
+            height: 30px;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, 0%);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        #progress {
+            width: 2%;
+            background-color: rgb(51, 174, 245);
+            height: 100%;
+            transition: .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1 style="font-size: 24px; transition: .5s;">Nimbus</h1>
+        <p id="search" id="font-size: 14px;">Searching for updates</p>
+
+        <div id="progressBar">
+            <div id="progress"></div>
+        </div>
+    </div>
+    <span style="position: fixed; right: 1%; bottom: 1%;">v1.0.0</span>
+
+    <script defer>
+
+
+        (async () => {
+            // Update Checking Coming Later
+
+            setTimeout(async () => {
+
+                document.getElementById("progress").style.width = "50%"
+
+                setTimeout(async () => {
+                    document.getElementById("progress").style.width = "100%"
+
+                    setTimeout(async () => {
+                        const { ipcRenderer } = require("electron");
+                        await ipcRenderer.invoke("openMain");
+
+                        const remote = require("@electron/remote")
+                        remote.getCurrentWindow().close();
+                    }, 400)
+
+                }, 1000)
+            }, 500)
+        })()
+    </script>
+</body>
+
+</html>
