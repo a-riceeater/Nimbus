@@ -4,6 +4,8 @@ let unsavedChanges = false;
 let currentLanguage = 'js'
 let invalidFormat = false;
 
+const currentTabs = [];
+
 function setNewSyntax(language) {
     currentLanguage = language;
 }
@@ -60,6 +62,7 @@ function openFileUser() {
             codeElement.value = fdata;
             Cache.putCache(data[0][0], fdata)
 
+            currentTabs.push(data[0][0]);
 
             updateHighlight(true);
 
@@ -250,6 +253,8 @@ function createFileExplorerElements(files, parentElement) {
 
                 document.getElementById("fileTab").appendChild(fTab);
 
+                currentTabs.push(file);
+
                 unsavedChanges = false;
 
                 fTab.addEventListener("click", async (e) => {
@@ -259,11 +264,11 @@ function createFileExplorerElements(files, parentElement) {
                             await prompt("Unsaved changes!", "Continue without saving?", (st) => {
                                 if (!st) return
                                 Tabs.removeTab();
-                                Cache.deleteCache(data[0][0])
+                                Cache.deleteCache(file)
                             })
                         } else {
                             Tabs.removeTab()
-                            Cache.deleteCache(data[0][0])
+                            Cache.deleteCache(file)
                         }
 
                     } else {
@@ -333,7 +338,14 @@ function createFileExplorerElements(files, parentElement) {
 }
 
 
-
-
-
 document.getElementById("openFileLabel").addEventListener("click", openFileUser)
+
+
+async function getLocal() {
+    return await ipcRenderer.invoke("getLocal");
+}
+
+getLocal()
+.then((data) => {
+    console.dir(data);
+})

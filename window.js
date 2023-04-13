@@ -146,6 +146,12 @@ ipcMain.handle("rnFile", async (event, old, newn) => {
     return true;
 })
 
+// Settings
+
+ipcMain.handle("getLocal", async (event) => {
+    return JSON.parse(fs.readFileSync("./local.json"))
+})
+
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
