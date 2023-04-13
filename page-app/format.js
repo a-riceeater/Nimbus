@@ -3,7 +3,10 @@ function updateHighlight(updateChanges) {
     if (updateChanges == true) console.log("%cSkipping changes status...", "color: yellow")
 
     const code = codeElement.value;
-    if (!updateChanges == true) unsavedChanges = true;
+    if (!updateChanges == true) {
+        unsavedChanges = true;
+        document.querySelector(".currentEditingTab > .fileBtnContent > .file-name").classList.add("unsavedChanges")
+    }
     try {
         if (!invalidFormat) {
             var highlightedCode = Prism.highlight(code, Prism.languages[currentLanguage], currentLanguage);
@@ -20,8 +23,8 @@ function updateHighlight(updateChanges) {
 }
 
 String.prototype.sanitizeHTML = function () {
-	return this.replace(new RegExp("&", "g"), "&amp;")
-		   .replace(new RegExp("<", "g"), "&lt;")
+    return this.replace(new RegExp("&", "g"), "&amp;")
+        .replace(new RegExp("<", "g"), "&lt;")
 }
 
 codeElement.addEventListener('input', updateHighlight);

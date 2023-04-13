@@ -91,6 +91,8 @@
 
 .file-name {
     font-size: 14px;
+    transition: .2s;
+    font-style: normal;
 }
 
 .file-type {
@@ -111,4 +113,9 @@
 
 .currentEditingTab {
     border-top: 2px solid #E4B363 !important;
+}
+
+.unsavedChanges {
+    font-style: italic;
+    font-weight: bold;
 }

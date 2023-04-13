@@ -5,6 +5,7 @@ let currentLanguage = 'js'
 let invalidFormat = false;
 
 const currentTabs = [];
+let currentLocal = {};
 
 function setNewSyntax(language) {
     currentLanguage = language;
@@ -146,6 +147,7 @@ function handleShortcuts(e) {
         if (!currentEditingFile) return;
 
         unsavedChanges = false;
+        document.querySelector(".currentEditingTab > .fileBtnContent > .file-name").classList.remove("unsavedChanges")
         saveFile(codeElement.value)
     }
 
@@ -347,5 +349,5 @@ async function getLocal() {
 
 getLocal()
 .then((data) => {
-    console.dir(data);
+    currentLocal = data;
 })
