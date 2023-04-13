@@ -1,3 +1,5 @@
 node_modules/electron/
 installer/node_modules
 installer/dist
+installer/base64.js
+installer/base64.txt
