@@ -82,6 +82,10 @@ textarea::-webkit-scrollbar {
     cursor: default !important;
 }
 
+#highlight, textarea {
+    word-wrap:break-word;
+}
+
 #closeXWindow {
     position: absolute;
     transform: translate(0%, -50%);
