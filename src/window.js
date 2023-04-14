@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require("path")
 require('@electron/remote/main').initialize()
 
+
 const createMainWindow = () => {
     const win = new BrowserWindow({
         width: 1920,
@@ -22,6 +23,26 @@ const createMainWindow = () => {
 
     win.loadFile('./page-app/index.html')
     require('@electron/remote/main').enable(win.webContents)
+
+    const pty = require("node-pty");
+    const os = require("os");
+    var shell = os.platform() === "win32" ? "powershell.exe" : "bash";
+
+    var ptyProcess = pty.spawn(shell, [], {
+        name: "xterm-color",
+        cols: 80,
+        rows: 24,
+        cwd: process.env.HOME,
+        env: process.env
+    });
+
+    ptyProcess.on('data', function (data) {
+        win.webContents.send("terminal.incomingData", data);
+    });
+
+    ipcMain.on("terminal.keystroke", (event, key) => {
+        ptyProcess.write(key);
+    });
 }
 
 const createLoaderWindow = () => {
@@ -43,8 +64,13 @@ const createLoaderWindow = () => {
     })
 
     win.loadFile('./page-app/loader.html')
+
+
     require('@electron/remote/main').enable(win.webContents)
+
 }
+
+
 
 app.whenReady().then(createLoaderWindow)
 
@@ -155,6 +181,9 @@ ipcMain.handle("getLocal", async (event) => {
     }`)
     else return JSON.parse(fs.readFileSync("./local.json"))
 })
+
+
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()

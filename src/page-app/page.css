@@ -119,3 +119,39 @@
     font-style: italic;
     font-weight: bold;
 }
+
+.tpbFile {
+    color: lightgray !important;
+    margin-left: 5px;
+    background-color: transparent;
+    transition: .25s;
+    border-radius: 2.5px;
+}
+
+.tpbFile:hover {
+    background-color: rgb(70, 69, 69);
+}
+
+#terminalPopup {
+    position: fixed;
+    top: 30px;
+    left: 100px;
+    height: 200px;
+    background-color: #E0DFD5;
+    z-index: 99;
+    display: block;
+}
+
+.tbpPop button {
+    background-color: transparent;
+    border: transparent;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    height: 25px;
+    transition: .25s;
+}
+
+.tbpPop button:hover {
+    background-color: #e0dec4;
+}

@@ -1,4 +1,3 @@
-const remote = require("@electron/remote")
 let maxStatus = 'full'
 
 document.getElementById("closeXWindow").addEventListener("click", () => {

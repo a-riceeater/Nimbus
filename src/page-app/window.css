@@ -247,3 +247,14 @@ textarea::-webkit-scrollbar {
 textarea {
     cursor: auto;
 }
+
+#terminal {
+    position: fixed;
+    left: calc(200px - 5px);
+    bottom: 0%;
+    height: 30%;
+    background-color: black;
+    color: white;
+    z-index: 9999;
+    width: calc(100% - (calc(200px - 5px)));
+}

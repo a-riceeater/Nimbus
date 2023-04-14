@@ -13,11 +13,16 @@
     "@electron/remote": "^2.0.9",
     "adm-zip": "^0.5.10",
     "electron-winstaller": "^5.1.0",
+    "node-pty": "^0.10.1",
     "path": "^0.12.7",
-    "windows-elevate": "^1.0.1"
+    "windows-elevate": "^1.0.1",
+    "xterm": "^5.1.0",
+    "xterm-addon-fit": "^0.7.0",
+    "xterm-addon-web-links": "^0.8.0"
   },
   "devDependencies": {
     "electron": "^24.1.1",
-    "electron-packager": "^17.1.1"
+    "electron-packager": "^17.1.1",
+    "electron-rebuild": "^3.2.9"
   }
 }

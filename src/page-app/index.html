@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./page.css">
     <link rel="stylesheet" href="./window.css">
     <link rel="stylesheet" href="./ftypes.css">
+    <link rel="stylesheet" href="../node_modules/xterm/css/xterm.css">
+    <script src="../node_modules/xterm/lib/xterm.js"></script>
 </head>
 
 <body>
@@ -21,6 +23,13 @@
         <button class="topbarBtn" id="maximizeWindow">🗖</button>
         <button class="topbarBtn" id="closeXWindow">X</button>
     </div>
+
+
+    <div class="tbpPop" id="terminalPopup">
+        <button>New Terminal</button>
+    </div>
+
+
     <div id="fileTab">
         <div class="fileBtn" style="width: 100px">
             <span class="fileBtnContent">
@@ -54,7 +63,6 @@
     <div id="shade"></div>
 
     <div id="terminal">
-        <span id="terminalLabel">TERMINAL</span>
     </div>
 
     <div id="welcomePannel">
@@ -87,6 +95,7 @@
 
 
     <script src="./format.js"></script>
+    <script src="./terminal.js"></script>
     <script src="./window.js"></script>
 </body>
 
