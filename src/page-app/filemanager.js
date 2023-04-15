@@ -66,6 +66,7 @@ function openFileUser() {
             currentTabs.push(data[0][0]);
 
             updateHighlight(true);
+            currentLanguage = data[0][0].split(".").pop();
 
             document.getElementById("welcomePannel").style.display = "none"
 
@@ -114,6 +115,7 @@ function openFileUser() {
                     codeElement.value = fdata;
 
                     updateHighlight(true);
+                    currentLanguage = data[0][0].split(".").pop();
 
                     document.getElementById("welcomePannel").style.display = "none"
                     document.getElementById("codeContainer").style.display = "block"
@@ -229,6 +231,11 @@ function createFileExplorerElements(files, parentElement) {
             fileElement.appendChild(document.createTextNode(fileName));
 
             fileElement.addEventListener("click", async () => {
+
+
+                console.log("currentLang set to " + extension)
+                currentLanguage = extension;
+
                 const cachedData = Cache.getCache(file)
 
                 const fTab = document.createElement("div");
@@ -275,12 +282,16 @@ function createFileExplorerElements(files, parentElement) {
 
                     } else {
 
+                        console.log("currentLang set to " + extension)
+                        currentLanguage = extension;
+
                         if (!cachedData) {
                             const fdata = await ipcRenderer.invoke("getFileContents", file)
 
                             codeElement.value = fdata;
 
                             updateHighlight(true);
+
 
                             document.getElementById("welcomePannel").style.display = "none"
                             document.getElementById("codeContainer").style.display = "block"
@@ -323,6 +334,7 @@ function createFileExplorerElements(files, parentElement) {
 
 
                     updateHighlight(true);
+                    currentLanguage = extension;
 
                     document.getElementById("welcomePannel").style.display = "none"
                     document.getElementById("codeContainer").style.display = "block"
@@ -348,6 +360,6 @@ async function getLocal() {
 }
 
 getLocal()
-.then((data) => {
-    currentLocal = data;
-})
+    .then((data) => {
+        currentLocal = data;
+    })
