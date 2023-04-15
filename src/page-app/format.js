@@ -34,6 +34,8 @@ function sync_scroll(element) {
     let result_element = highlightElement;
     result_element.scrollTop = element.scrollTop;
     result_element.scrollLeft = element.scrollLeft;
+
+    console.log(result_element.scrollTop, element.scrollTop)
 }
 
 var lastChar;

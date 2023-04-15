@@ -50,7 +50,7 @@
     left: 200px;
     z-index: 1;
     width: calc(100% - 200px);
-    height: calc(100% - 75px);
+    height: calc(100% - 75px - 30%);
     outline: 0;
     border-top: 1px solid #313638;
 }

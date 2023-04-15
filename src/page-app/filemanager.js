@@ -30,6 +30,7 @@ async function openDirFiles(dir) {
 }
 
 async function saveFile(fileData) {
+    console.log("Saving...")
     const result = await ipcRenderer.invoke("saveFile", currentEditingFile, fileData);
     console.dir(result);
     return result;
@@ -116,6 +117,7 @@ function openFileUser() {
 
                     updateHighlight(true);
                     currentLanguage = data[0][0].split(".").pop();
+                    currentEditingFile = data[0][0];
 
                     document.getElementById("welcomePannel").style.display = "none"
                     document.getElementById("codeContainer").style.display = "block"
@@ -235,6 +237,7 @@ function createFileExplorerElements(files, parentElement) {
 
                 console.log("currentLang set to " + extension)
                 currentLanguage = extension;
+                currentEditingFile = file;
 
                 const cachedData = Cache.getCache(file)
 
@@ -284,6 +287,7 @@ function createFileExplorerElements(files, parentElement) {
 
                         console.log("currentLang set to " + extension)
                         currentLanguage = extension;
+                        currentEditingFile = file;
 
                         if (!cachedData) {
                             const fdata = await ipcRenderer.invoke("getFileContents", file)
