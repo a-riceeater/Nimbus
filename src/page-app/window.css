@@ -50,7 +50,7 @@
     left: 200px;
     z-index: 1;
     width: calc(100% - 200px);
-    height: calc(100% - 75px - 30%);
+    height: calc(100% - 75px);
     outline: 0;
     border-top: 1px solid #313638;
 }
@@ -257,4 +257,5 @@ textarea {
     color: white;
     z-index: 9999;
     width: calc(100% - (calc(200px - 5px)));
+    display: none;
 }

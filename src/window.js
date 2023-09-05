@@ -89,7 +89,8 @@ ipcMain.handle('openDir', async () => {
 
 ipcMain.handle("openDirFiles", async (event, dir) => {
     try {
-        const files = await fs.promises.readdir(dir);
+        if (!dir) return false;
+        const files = await fs.readdirSync(dir);
         const fss = [];
 
         for (const file of files) {
@@ -154,7 +155,7 @@ ipcMain.handle("getFileContents", async (event, file) => {
 ipcMain.handle("saveFile", async (event, file, fdata) => {
     console.log(`Saving file ${file}`)
     fs.writeFileSync(file, fdata, "utf8", (err) => { if (err) throw err });
-    return true;
+    return "Saved.";
 })
 
 ipcMain.handle("dirFile", async (event, file) => {
@@ -175,11 +176,11 @@ ipcMain.handle("rnFile", async (event, old, newn) => {
 // Settings
 
 ipcMain.handle("getLocal", async (event) => {
-    if (!fs.existsSync("./local.json")) return JSON.parse(`{
+    if (!fs.existsSync("C:\\Program Files\\Nimbus\\local.json")) return JSON.parse(`{
         "currentFolder": "",
         "currentTabs": []
     }`)
-    else return JSON.parse(fs.readFileSync("./local.json"))
+    else return JSON.parse(fs.readFileSync("C:\\Program Files\\Nimbus\\local.json"))
 })
 
 

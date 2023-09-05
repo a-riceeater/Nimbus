@@ -5,6 +5,7 @@ function putCache(name, data) {
 }
 
 function getCache(name) {
+    invalidFormat = false;
     return contentCache[name];
 }
 

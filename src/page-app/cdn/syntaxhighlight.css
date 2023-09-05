@@ -1,0 +1,46 @@
+/* AO - Atom One Dark Theme */
+
+.dark-container {
+    background-color: #282c34;
+    color: #abb2bf;
+}
+
+.dark-token-function {
+    color: #b372cc;
+}
+
+.dark-token-bracket {
+    color: #f2d71b;
+}
+
+.dark-token-name {
+    color: #61afef;
+}
+
+.dark-token-else {
+    color: #abb2bf;
+}
+
+.dark-token-qu {
+    color: #74b069;
+}
+
+.dark-token-lb {
+    color: #4fa0b3;
+}
+
+.dark-token-dy {
+    color: #d6b262;
+}
+
+.dark-token-dcvn {
+    color: #c38954;
+}
+
+.dark-token-ih {
+    color: #ca5859;
+}
+
+.dark-token-comment {
+    color: #4b5d6e;
+}

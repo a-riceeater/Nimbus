@@ -1,3 +1,5 @@
+const highlight = new SyntaxHighlight(highlightElement);
+
 function updateHighlight(updateChanges) {
     console.log("%cFormating...", "color: lightblue")
     if (updateChanges == true) console.log("%cSkipping changes status...", "color: yellow")
@@ -8,16 +10,24 @@ function updateHighlight(updateChanges) {
         document.querySelector(".currentEditingTab > .fileBtnContent > .file-name").classList.add("unsavedChanges")
     }
     try {
-        if (!invalidFormat) {
+        /*if (!invalidFormat) {
             var highlightedCode = Prism.highlight(code, Prism.languages[currentLanguage], currentLanguage);
             highlightElement.innerHTML = highlightedCode;
         } else {
             highlightElement.innerHTML = code.sanitizeHTML()
+        }*/
+
+        currentLanguage == "html" ? highlightElement.innerText = code : highlightElement.innerHTML = code;
+        if (!invalidFormat) {
+            console.log(currentLanguage)
+            highlight.highlight(currentLanguage);
         }
+
     } catch (err) {
         invalidFormat = true;
         highlightElement.innerHTML = code.sanitizeHTML()
         console.log("%cInvalid format detected. Name: " + currentLanguage, "color: red")
+        console.error(err)
     }
 
 }
@@ -32,10 +42,13 @@ codeElement.addEventListener("scroll", () => sync_scroll(codeElement))
 
 function sync_scroll(element) {
     let result_element = highlightElement;
-    result_element.scrollTop = element.scrollTop;
+
+    let scrollTop = element.scrollTop;
+
+    result_element.scrollTop = scrollTop;
     result_element.scrollLeft = element.scrollLeft;
 
-    console.log(result_element.scrollTop, element.scrollTop)
+    console.log(result_element.scrollTop, scrollTop)
 }
 
 var lastChar;
@@ -185,6 +198,15 @@ codeElement.addEventListener("keydown", (event) => {
             }
 
             break;
+    }
+
+    // easyHtml
+    if (currentLanguage == "html") {
+        switch (event.key) {
+            case ">":
+                
+                break;
+        }
     }
 
     updateHighlight();

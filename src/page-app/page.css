@@ -139,7 +139,7 @@
     height: 200px;
     background-color: #E0DFD5;
     z-index: 99;
-    display: block;
+    display: none;
 }
 
 .tbpPop button {

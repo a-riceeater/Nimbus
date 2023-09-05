@@ -16,11 +16,14 @@ async function openFile() {
     if (!file) return;
     const data = await ipcRenderer.invoke("getFileContents", file[0])
 
+    invalidFormat = false;
     return [file, data];
 }
 
 async function openDir() {
     const result = await ipcRenderer.invoke("openDir")
+    document.title = result[0].toString().split("\\").pop("\\") + " - Nimbus";
+
     return result;
 }
 
